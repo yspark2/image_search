@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/item_home_iv"
+        android:layout_width="190dp"
+        android:layout_height="190dp"
+        android:layout_margin="8dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_launcher_background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/item_home_iv_love"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/love_fill"
+        app:layout_constraintBottom_toBottomOf="@+id/item_home_tv_title"
+        app:layout_constraintEnd_toEndOf="@+id/item_home_iv"
+        app:layout_constraintTop_toTopOf="@+id/item_home_tv_title" />
+
+    <TextView
+        android:id="@+id/item_home_tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="5dp"
+        android:maxLines="1"
+        android:text="테스트를 위한 텍스트"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/item_home_iv" />
+
+    <TextView
+        android:id="@+id/item_home_tv_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="5dp"
+        android:maxLines="1"
+        android:text="날짜 테스트를 위한 텍스트"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/item_home_tv_title" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
