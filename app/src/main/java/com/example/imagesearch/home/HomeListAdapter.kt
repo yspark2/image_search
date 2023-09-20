@@ -1,6 +1,8 @@
 package com.example.imagesearch.home
 
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -35,17 +37,30 @@ class HomeListAdapter : RecyclerView.Adapter<HomeListAdapter.ViewHolder>() {
             }
             itemHomeTvTitle.text = item.title
             itemHomeTvDate.text = item.date
+//            itemHomeIvLove.setImageResource()
         }
     }
-
 
     fun itemClear() {
         list.clear()
     }
 
     fun addItem(homeModel: HomeModel) {
+//        if(!homeModel.img.endsWith(".png") && !homeModel.img.endsWith(".jpg")){
+//            homeModel.img += ".png"
+//            Log.d("change", "${homeModel.img}")
+//        }
         list.add(homeModel)
 //        notifyItemInserted(list.size - 1)
         notifyDataSetChanged()
+    }
+
+//    override fun onClick(view: View){
+//
+//    }
+
+
+    fun modifyItem(position: Int, homeModel: HomeModel) {
+
     }
 }

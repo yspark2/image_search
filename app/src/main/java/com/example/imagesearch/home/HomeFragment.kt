@@ -1,11 +1,13 @@
 package com.example.imagesearch.home
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -50,10 +52,15 @@ class HomeFragment : Fragment() {
 
         binding.fragmentHomeBtn.setOnClickListener {
             viewModel.searchImage(binding.fragmentHomeEt.text.trim().toString())
+
+            val imm = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            // 키보드 숨기기
+            imm.hideSoftInputFromWindow(binding.fragmentHomeEt.windowToken, 0)
         }
 
         viewModel.myCustomPosts.observe(viewLifecycleOwner, Observer { result ->
             if (result.isSuccessful) {
+
 //                Log.d("test", "$result")
                 listAdapter.itemClear()
                 for (i in result.body()!!.documents!!) {
@@ -61,7 +68,8 @@ class HomeFragment : Fragment() {
                     val homeModel = HomeModel(
                         img = i.image_url,
                         title = i.siteName,
-                        date = null
+                        date = i.dateTime,
+                        like = false,
                     )
                     listAdapter.addItem(homeModel)
                 }
@@ -77,6 +85,7 @@ class HomeFragment : Fragment() {
         fragmentHomeRecyclerview.adapter = listAdapter
         fragmentHomeRecyclerview.layoutManager =
             StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL)
+
     }
 
     override fun onDestroy() {

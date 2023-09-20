@@ -18,7 +18,7 @@
         android:id="@+id/item_home_iv_love"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:src="@drawable/love_fill"
+        android:src="@drawable/love_empty"
         app:layout_constraintBottom_toBottomOf="@+id/item_home_tv_title"
         app:layout_constraintEnd_toEndOf="@+id/item_home_iv"
         app:layout_constraintTop_toTopOf="@+id/item_home_tv_title" />

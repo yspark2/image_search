@@ -1,4 +1,12 @@
 package com.example.imagesearch.repo
 
-class RepoModel {
-}
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
+data class RepoModel(
+    val img: String,
+    val title: String,
+    val date: String?,
+    val like: Boolean
+) : Parcelable
