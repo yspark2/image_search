@@ -11,7 +11,7 @@ class MainViewModel(private val repository: Repository): ViewModel() {
 
     fun searchImage(query: String){
         viewModelScope.launch {
-            val response = repository.searchImage(query, "accuracy")
+            val response = repository.searchImage(query, "recency ")
             myCustomPosts.value = response
         }
     }

@@ -1,8 +1,10 @@
 package com.example.imagesearch.repo
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.imagesearch.databinding.ItemRepoBinding
 
 class RepoListAdapter : RecyclerView.Adapter<RepoListAdapter.ViewHolder>() {
@@ -16,7 +18,8 @@ class RepoListAdapter : RecyclerView.Adapter<RepoListAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: RepoListAdapter.ViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        val item = list[position]
+        holder.bind(item)
     }
 
     override fun getItemCount(): Int {
@@ -25,7 +28,36 @@ class RepoListAdapter : RecyclerView.Adapter<RepoListAdapter.ViewHolder>() {
 
     class ViewHolder(private val binding: ItemRepoBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: RepoModel) = with(binding) {
-
+            item?.img.let {
+                Glide.with(itemRepoIv.context)
+                    .load(it)
+                    .into(itemRepoIv)
+            }
+            itemRepoTvTitle.text = item.title
+            itemRepoTvDate.text = item.date
         }
     }
+
+    fun addItem(item: RepoModel){
+        list.add(item)
+        notifyDataSetChanged()
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

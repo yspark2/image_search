@@ -9,7 +9,7 @@ class Repository {
     suspend fun searchImage(query: String, sort: String): Response<ImageSearchResponse> {
         return RetrofitInstance.api.searchImage(
             apiKey,
-            query = query, sort = sort, page = 1, size = 20
+            query = query, sort = sort, page = 1, size = 80
         )
     }
 }

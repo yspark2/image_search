@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.imagesearch.R
 import com.example.imagesearch.databinding.FragmentHomeBinding
+import com.example.imagesearch.main.MainActivity
 import com.example.imagesearch.main.MainViewModel
 import com.example.imagesearch.main.MainViewModelFactory
 import com.example.imagesearch.main.Repository
@@ -52,16 +53,17 @@ class HomeFragment : Fragment() {
 
         binding.fragmentHomeBtn.setOnClickListener {
             viewModel.searchImage(binding.fragmentHomeEt.text.trim().toString())
+            MainActivity().saveData(requireContext(), binding.fragmentHomeEt.text.trim().toString())
 
             val imm = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             // 키보드 숨기기
             imm.hideSoftInputFromWindow(binding.fragmentHomeEt.windowToken, 0)
         }
 
+
         viewModel.myCustomPosts.observe(viewLifecycleOwner, Observer { result ->
             if (result.isSuccessful) {
 
-//                Log.d("test", "$result")
                 listAdapter.itemClear()
                 for (i in result.body()!!.documents!!) {
                     Log.d("test", "$i")
@@ -79,6 +81,12 @@ class HomeFragment : Fragment() {
 
             }
         })
+
+//        listAdapter.itemClick = object : HomeListAdapter.ItemClick{
+//            override fun onClick(view: View, position: Int) {
+//                Log.d("ItemClicked", "Clicked item at position $position")
+//            }
+//        }
     }
 
     private fun initView() = with(binding) {
@@ -86,6 +94,8 @@ class HomeFragment : Fragment() {
         fragmentHomeRecyclerview.layoutManager =
             StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL)
 
+        // 주변에 아이템 깜빡이는 버그 현상 제거
+        fragmentHomeRecyclerview.itemAnimator = null
     }
 
     override fun onDestroy() {

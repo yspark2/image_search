@@ -12,11 +12,11 @@ data class HomeModel(
     val like: Boolean = false
 ) : Parcelable
 
-fun HomeModel.toRepoModel(): RepoModel{
-    return RepoModel(
-        img = img,
-        title = title,
-        date = date,
-        like = like
-    )
-}
+//fun HomeModel.toRepoModel(): RepoModel{
+//    return RepoModel(
+//        img = img,
+//        title = title,
+//        date = date,
+//        like = like
+//    )
+//}

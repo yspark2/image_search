@@ -1,9 +1,13 @@
 package com.example.imagesearch.main
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.viewpager2.widget.ViewPager2
 import com.example.imagesearch.databinding.ActivityMainBinding
+import com.example.imagesearch.home.HomeModel
+import com.example.imagesearch.repo.RepoFragment
+import com.example.imagesearch.repo.toRepoModel
 import com.google.android.material.tabs.TabLayoutMediator
 
 class MainActivity : AppCompatActivity() {
@@ -20,7 +24,10 @@ class MainActivity : AppCompatActivity() {
 
         initView()
 
+
+
     }
+
 
     private fun initView() = with(binding){
 
@@ -45,5 +52,22 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         )
+    }
+
+
+    /**
+     * 마지막 검색어를 Shared Preferences에 저장
+     * context 호출하는 컨텍스트 (일반적으로 Activity 또는 Application)
+     * query 저장하려는 검색어 문자열
+    */
+    fun saveData(context: Context, query: String){
+        val prefs = context.getSharedPreferences("lastSearch", Context.MODE_PRIVATE)
+        prefs.edit().putString("pref", query).apply()
+    }
+
+
+    fun getLastSearch(context: Context): String? {
+        val prefs = context.getSharedPreferences("lastSearch", Context.MODE_PRIVATE)
+        return prefs.getString("pref", null)
     }
 }
