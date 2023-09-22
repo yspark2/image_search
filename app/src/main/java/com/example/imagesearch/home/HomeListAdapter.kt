@@ -31,24 +31,6 @@ class HomeListAdapter : RecyclerView.Adapter<HomeListAdapter.ViewHolder>() {
     override fun onBindViewHolder(holder: HomeListAdapter.ViewHolder, position: Int) {
         holder.itemView.setOnClickListener {
             itemClick?.onClick(it, position)
-
-//            Log.d("ItemClicked", "position $position at onBindViewHolder")
-
-            // 클릭한 아이템의 정보
-            val clickItem = list[position]
-
-            // 클릭한 아이템의 정보를 RepoModel로 변환
-            val repoItem = clickItem.toRepoModel()
-
-//            Log.d("ItemClicked", repoItem.toString())
-
-            // RepoFragment에 클릭한 아이템의 정보를 전달
-            val repoFragment = RepoFragment.newInstance()
-            val bundle = Bundle()
-            bundle.putParcelable("repoItem", repoItem)
-            repoFragment.arguments = bundle
-
-
         }
         val item = list[position]
         holder.bind(item)
@@ -73,13 +55,16 @@ class HomeListAdapter : RecyclerView.Adapter<HomeListAdapter.ViewHolder>() {
         }
     }
 
+    fun getItem(position: Int): HomeModel{
+        return list[position]
+    }
+
     fun itemClear() {
         list.clear()
     }
 
     fun addItem(homeModel: HomeModel) {
         list.add(homeModel)
-//        notifyItemInserted(list.size - 1)
         notifyDataSetChanged()
     }
 }

@@ -10,13 +10,9 @@ data class HomeModel(
     val title: String,
     val date: String?,
     val like: Boolean = false
-) : Parcelable
+) : Parcelable {
 
-//fun HomeModel.toRepoModel(): RepoModel{
-//    return RepoModel(
-//        img = img,
-//        title = title,
-//        date = date,
-//        like = like
-//    )
-//}
+    fun isSameItem(other: HomeModel): Boolean{
+        return title == other.title && date == other.date
+    }
+}

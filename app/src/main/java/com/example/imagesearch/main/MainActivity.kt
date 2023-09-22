@@ -3,6 +3,7 @@ package com.example.imagesearch.main
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.example.imagesearch.databinding.ActivityMainBinding
 import com.example.imagesearch.home.HomeModel
@@ -12,8 +13,8 @@ import com.google.android.material.tabs.TabLayoutMediator
 
 class MainActivity : AppCompatActivity() {
 
+    lateinit var sharedViewModel: SharedViewModel
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
-
     private val viewPagerAdapter by lazy {
         MainViewPagerAdapter(this@MainActivity)
     }
@@ -22,9 +23,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        sharedViewModel = ViewModelProvider(this)[SharedViewModel::class.java]
         initView()
-
-
 
     }
 
@@ -38,22 +38,21 @@ class MainActivity : AppCompatActivity() {
             tab.setIcon(viewPagerAdapter.getIcon(position))
         }.attach()
 
-        binding.activityMainViewpager.registerOnPageChangeCallback(
-            object: ViewPager2.OnPageChangeCallback(){
-                override fun onPageSelected(position: Int) {
-                    when(position){
-                        0 -> {
-                            binding.activityMainFab.show()
-                        }
-                        1 -> {
-                            binding.activityMainFab.hide()
-                        }
-                    }
-                }
-            }
-        )
+//        binding.activityMainViewpager.registerOnPageChangeCallback(
+//            object: ViewPager2.OnPageChangeCallback(){
+//                override fun onPageSelected(position: Int) {
+//                    when(position){
+//                        0 -> {
+//                            binding.activityMainFab.show()
+//                        }
+//                        1 -> {
+//                            binding.activityMainFab.hide()
+//                        }
+//                    }
+//                }
+//            }
+//        )
     }
-
 
     /**
      * 마지막 검색어를 Shared Preferences에 저장
@@ -64,7 +63,6 @@ class MainActivity : AppCompatActivity() {
         val prefs = context.getSharedPreferences("lastSearch", Context.MODE_PRIVATE)
         prefs.edit().putString("pref", query).apply()
     }
-
 
     fun getLastSearch(context: Context): String? {
         val prefs = context.getSharedPreferences("lastSearch", Context.MODE_PRIVATE)

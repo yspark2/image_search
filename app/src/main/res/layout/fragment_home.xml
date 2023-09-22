@@ -48,6 +48,19 @@
             app:layout_constraintTop_toBottomOf="@+id/fragment_home_et"
             tools:listitem="@layout/item_home" />
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fragment_home_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="100dp"
+            android:backgroundTint="@color/white"
+            android:src="@drawable/arrow_toward2"
+            app:fabCustomSize="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:rippleColor="@color/wine" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

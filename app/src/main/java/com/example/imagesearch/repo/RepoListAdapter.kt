@@ -6,10 +6,16 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.imagesearch.databinding.ItemRepoBinding
+import com.example.imagesearch.home.HomeModel
 
 class RepoListAdapter : RecyclerView.Adapter<RepoListAdapter.ViewHolder>() {
 
     private val list = ArrayList<RepoModel>()
+    var itemClick: ItemClick? = null
+
+    interface ItemClick {
+        fun onClick(view: View, position: Int)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepoListAdapter.ViewHolder {
         return ViewHolder(
@@ -37,10 +43,24 @@ class RepoListAdapter : RecyclerView.Adapter<RepoListAdapter.ViewHolder>() {
             itemRepoTvDate.text = item.date
         }
     }
+    fun getItem(position: Int): RepoModel {
+        return list[position]
+    }
 
-    fun addItem(item: RepoModel){
-        list.add(item)
-        notifyDataSetChanged()
+    fun addItem(item: RepoModel) {
+        if (!list.contains(item)) {
+
+            list.add(item)
+            notifyDataSetChanged()
+
+        }
+    }
+
+    fun removeItem(position: Int) {
+        if (position >= 0 && position < list.size) {
+            list.removeAt((position))
+            notifyItemRemoved(position)
+        }
     }
 }
 

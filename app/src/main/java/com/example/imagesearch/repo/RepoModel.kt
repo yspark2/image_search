@@ -10,7 +10,9 @@ data class RepoModel(
     val title: String,
     val date: String?,
     val like: Boolean = false
-) : Parcelable
+) : Parcelable {
+
+}
 
 
 // HomeModel 객체를 받아와 RepoModel 객체로 변환
