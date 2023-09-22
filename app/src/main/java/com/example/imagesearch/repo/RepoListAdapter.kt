@@ -24,6 +24,9 @@ class RepoListAdapter : RecyclerView.Adapter<RepoListAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: RepoListAdapter.ViewHolder, position: Int) {
+        holder.itemView.setOnClickListener {
+            itemClick?.onClick(it, position)
+        }
         val item = list[position]
         holder.bind(item)
     }
@@ -42,24 +45,30 @@ class RepoListAdapter : RecyclerView.Adapter<RepoListAdapter.ViewHolder>() {
             itemRepoTvTitle.text = item.title
             itemRepoTvDate.text = item.date
         }
-    }
-    fun getItem(position: Int): RepoModel {
-        return list[position]
-    }
 
+    }
     fun addItem(item: RepoModel) {
-        if (!list.contains(item)) {
-
-            list.add(item)
-            notifyDataSetChanged()
-
-        }
+        list.add(item)
+        notifyDataSetChanged()
+//        if (!list.contains(item)) {
+//
+//            list.add(item)
+//            notifyDataSetChanged()
+//
+//        }
     }
+
+
+
+//    fun getItem(position: Int): RepoModel{
+//        return list[position]
+//    }
 
     fun removeItem(position: Int) {
         if (position >= 0 && position < list.size) {
             list.removeAt((position))
             notifyItemRemoved(position)
+            notifyItemRangeChanged(position, itemCount)
         }
     }
 }

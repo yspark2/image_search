@@ -56,8 +56,11 @@ class RepoFragment : Fragment() {
 
         listAdapter.itemClick = object: RepoListAdapter.ItemClick{
             override fun onClick(view: View, position: Int) {
-                listAdapter.removeItem(position)
+
                 Log.d("ItemClicked", "삭제 : $position")
+                listAdapter.removeItem(position)
+                sharedViewModel.selectedItem.value?.like = false
+
             }
         }
         initView()

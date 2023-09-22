@@ -18,7 +18,8 @@ class HomeListAdapter : RecyclerView.Adapter<HomeListAdapter.ViewHolder>() {
     private val list = ArrayList<HomeModel>()
 
     var itemClick: ItemClick? = null
-    interface ItemClick{
+
+    interface ItemClick {
         fun onClick(view: View, position: Int)
     }
 
@@ -40,9 +41,17 @@ class HomeListAdapter : RecyclerView.Adapter<HomeListAdapter.ViewHolder>() {
         return list.size
     }
 
+    fun likeChanged(homeModel: HomeModel) {
+        if (homeModel.like) {
+            homeModel.like = false
+        } else {
+            homeModel.like = true
+        }
+        notifyDataSetChanged()
+    }
+
     inner class ViewHolder(private val binding: ItemHomeBinding) :
         RecyclerView.ViewHolder(binding.root) {
-
         fun bind(item: HomeModel) = with(binding) {
             item.img?.let {
                 Glide.with(itemHomeIv.context)
@@ -51,11 +60,15 @@ class HomeListAdapter : RecyclerView.Adapter<HomeListAdapter.ViewHolder>() {
             }
             itemHomeTvTitle.text = item.title
             itemHomeTvDate.text = item.date
-//            itemHomeIvLove.setImageResource()
+            itemHomeIvLove.visibility = if (!item.like) {
+                View.INVISIBLE
+            } else {
+                View.VISIBLE
+            }
         }
     }
 
-    fun getItem(position: Int): HomeModel{
+    fun getItem(position: Int): HomeModel {
         return list[position]
     }
 

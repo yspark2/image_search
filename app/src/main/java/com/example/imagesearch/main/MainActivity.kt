@@ -37,21 +37,6 @@ class MainActivity : AppCompatActivity() {
             tab.setText(viewPagerAdapter.getTitle(position))
             tab.setIcon(viewPagerAdapter.getIcon(position))
         }.attach()
-
-//        binding.activityMainViewpager.registerOnPageChangeCallback(
-//            object: ViewPager2.OnPageChangeCallback(){
-//                override fun onPageSelected(position: Int) {
-//                    when(position){
-//                        0 -> {
-//                            binding.activityMainFab.show()
-//                        }
-//                        1 -> {
-//                            binding.activityMainFab.hide()
-//                        }
-//                    }
-//                }
-//            }
-//        )
     }
 
     /**

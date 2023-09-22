@@ -88,8 +88,16 @@ class HomeFragment : Fragment() {
 
         listAdapter.itemClick = object : HomeListAdapter.ItemClick{
             override fun onClick(view: View, position: Int) {
-                val selectedItem = listAdapter.getItem(position)
-                sharedViewModel.selectedItem.value = selectedItem
+                var item = listAdapter.getItem(position)
+//                item.like = !item.like
+                if(!item.like){
+                    listAdapter.likeChanged(item)
+                    sharedViewModel.selectedItem.value = item
+                }else{
+                    //제거 부분
+                    listAdapter.likeChanged(item)
+                    sharedViewModel.selectedItem.value = null
+                }
             }
         }
     }
